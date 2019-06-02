@@ -18,45 +18,54 @@ func nextInt() int {
 	return i
 }
 
-type xyz struct {
-	x int
-	y int
-	z int
+var rdr = bufio.NewReaderSize(os.Stdin, 1000000)
+
+func readLine() string {
+	buf := make([]byte, 0, 1000000)
+	for {
+		l, p, e := rdr.ReadLine()
+		if e != nil {
+			panic(e)
+		}
+		buf = append(buf, l...)
+		if !p {
+			break
+		}
+	}
+	return string(buf)
 }
 
 func main() {
-	sc.Split(bufio.ScanWords)
 
-	N := nextInt()
-	Y := nextInt()
-	//N := 9
-	//Y := 45000
-	slice := []xyz{}
+	divide := []string{"dream", "dreamer", "erase", "eraser"}
 
-L:
-	for i := 0; i < N+1; i++ {
-		x := N - i
-		for j := 0; j < x+1; j++ {
-			z := N - i - j
-			if 10000*i+5000*j+1000*z == Y {
-				slice = append(slice, xyz{
-					x: i,
-					y: j,
-					z: z,
-				})
-				break L
+	var s string
+	s = readLine()
+
+	end := len(s)
+	can := false
+	strLen := 0
+	for i := len(s) - 1; i >= 0; i-- {
+		st := s[i:end]
+
+		for j := 0; j < len(divide); j++ {
+			if st == divide[j] {
+				//fmt.Println(reverse(st))
+				can = true
+				strLen += len(divide[j])
+				end = i
+				i--
+
+				break
 			}
-
 		}
+
 	}
 
-	if len(slice) == 0 {
-		fmt.Printf("-1 -1 -1")
+	if can && strLen == len(s) {
+		fmt.Println("YES")
 	} else {
-		x := slice[0].x
-		y := slice[0].y
-		z := slice[0].z
-
-		fmt.Printf("%d %d %d", x, y, z)
+		fmt.Println("NO")
 	}
+
 }
