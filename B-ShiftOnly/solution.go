@@ -37,6 +37,7 @@ func main() {
 			}
 			A[i] = A[i] / 2
 		}
+
 		if loop {
 			count++
 		}
