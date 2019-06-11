@@ -35,27 +35,9 @@ func main() {
 	fmt.Println(slice)
 	max := math.Inf(-1)
 
-	for i := 0; i < n; i++ {
-		total := x
-		total -= slice[0] * i
 
-		for j := 0; j < n-1; j++ {
-			total -= slice[1] * j
+	for i := 0; i < 
 
-			k := n - i - j
-			total -= slice[2] * k
-			fmt.Printf("total = %d\n", total)
-			if total == 0 {
-				fmt.Printf("(%d, %d, %d)\n", i, j, k)
-				count := math.Max(float64(i), math.Max(float64(j), float64(k)))
-				if max < count {
-					max = count
-				}
-			}
 
-		}
-	}
-
-	fmt.Println(max)
 
 }
