@@ -24,20 +24,21 @@ func nextLine() string {
 }
 
 func main() {
+	var str string
+	fmt.Scan(&str)
 
-	str := nextLine()
-	m := map[string]int{}
-	// fmt.Println(strings.Split(s, ""))
-	// sort.Sort(sort.StringSlice(strings.Split(s, "")))
-	// fmt.Println(s)
+	slice := make([]int, 26)
+	for _, v := range str {
+		slice[int(v)-97] = 1
+	}
 
-	for _, key := range str {
-		if _, ok := m[string(key)]; !ok {
-			m[string(key)] = 1
-		} else {
-			m[string(key)]++
+	for i, v := range slice {
+		if v == 0 {
+			fmt.Println(string(i + 97))
+			return
 		}
 	}
 
-	fmt.Println(m)
+	fmt.Println("None")
+
 }
