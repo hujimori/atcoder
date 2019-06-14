@@ -47,7 +47,7 @@ func main() {
 	strLen := 0
 	for i := len(s) - 1; i >= 0; i-- {
 		st := s[i:end]
-
+		fmt.Println(st)
 		for j := 0; j < len(divide); j++ {
 			if st == divide[j] {
 				//fmt.Println(reverse(st))
