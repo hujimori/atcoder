@@ -28,20 +28,19 @@ func main() {
 	}
 
 	length := 0
-	start := 0
-	for i := 0; i < len(slice)-1; i++ {
+	for i := 0; i < len(slice); i++ {
 		// tmp := slice[start:len(slice)]
-		fmt.Println(slice)
+		// fmt.Println(slice)
 
-		for j := 1; j < len(slice); j++ {
-			fmt.Printf("i=%d, j=%d\n", i, j)
+		for j := 1; j < len(slice)-1; j++ {
+			// fmt.Printf("i=%d, j=%d\n", i, j)
 			if slice[i] < slice[j] && slice[j] < slice[j+1] {
 				continue
 			}
 
 			if slice[i] > slice[j] && slice[j] < slice[j+1] {
 				length++
-				i = j
+				i += j
 				break
 			}
 
@@ -51,16 +50,16 @@ func main() {
 
 			if slice[i] < slice[j] && slice[j] > slice[j+1] {
 				length++
-				i = j
+				i += j
 				break
 			}
 
-			if slice[j] == slice[j+1] {
+			if slice[i] == slice[j] && slice[j] == slice[j+1] {
 				continue
 			}
 
 		}
-		fmt.Println(length)
+		// fmt.Println(length)
 
 	}
 
