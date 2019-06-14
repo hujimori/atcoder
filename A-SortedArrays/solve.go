@@ -28,7 +28,7 @@ func main() {
 	}
 
 	length := 0
-	// start := 0
+	start := 0
 	for i := 0; i < len(slice)-1; i++ {
 		// tmp := slice[start:len(slice)]
 		fmt.Println(slice)
