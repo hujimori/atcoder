@@ -109,7 +109,7 @@ func main() {
 
 		lower := strconv.Itoa(s.Y)
 		for len(lower) == 6 {
-			lower = "0" + lower
+			lower = "0" + 
 		}
 
 		serials[i].Id = s.Id
