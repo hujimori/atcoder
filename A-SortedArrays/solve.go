@@ -27,42 +27,28 @@ func main() {
 		slice[i] = nextInt()
 	}
 
-	length := 0
-	for i := 0; i < len(slice); i++ {
-		// tmp := slice[start:len(slice)]
-		// fmt.Println(slice)
+	length := 1
+	up := 0
+	down := 0
 
-		for j := 1; j < len(slice)-1; j++ {
-			// fmt.Printf("i=%d, j=%d\n", i, j)
-			if slice[i] < slice[j] && slice[j] < slice[j+1] {
-				continue
-			}
-
-			if slice[i] > slice[j] && slice[j] < slice[j+1] {
-				length++
-				i += j
-				break
-			}
-
-			if slice[i] > slice[j] && slice[j] > slice[j+1] {
-				continue
-			}
-
-			if slice[i] < slice[j] && slice[j] > slice[j+1] {
-				length++
-				i += j
-				break
-			}
-
-			if slice[i] == slice[j] && slice[j] == slice[j+1] {
-				continue
-			}
-
+	for i := 1; i < len(slice); i++ {
+		if slice[i-1] < slice[i] {
+			up = 1
+		} else if slice[i-1] > slice[i] {
+			down = 1
+		} else {
+			// i++
+			continue
 		}
-		// fmt.Println(length)
+
+		if up == 1 && down == 1 {
+			up = 0
+			down = 0
+
+			length++
+		}
 
 	}
 
 	fmt.Println(length)
-
 }
