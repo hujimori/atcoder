@@ -43,7 +43,7 @@ func main() {
 			y: float64(nextInt()),
 		}
 	}
-	fmt.Println(slice)
+	// fmt.Println(slice)
 
 	max := math.Inf(-1)
 	res := 0.0
