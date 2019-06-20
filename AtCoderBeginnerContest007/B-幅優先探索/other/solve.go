@@ -10,10 +10,10 @@ type P struct {
 }
 
 type Queue struct {
-	p []P
+	p []*P
 }
 
-func (q *Queue) push(p P) {
+func (q *Queue) push(p *P) {
 	q.p = append(q.p, p)
 }
 
@@ -21,7 +21,7 @@ func (q *Queue) pop() {
 	q.p = q.p[1:]
 }
 
-func (q *Queue) front() P {
+func (q *Queue) front() *P {
 	return q.p[0]
 }
 
@@ -74,7 +74,7 @@ func main() {
 func bfs() int {
 	// 初期位置をキューにpush
 	q := Queue{}
-	q.push(P{X: sx, Y: sy})
+	q.push(&P{X: sx, Y: sy})
 	// 初期位置のコストを0
 	d[sx][sy] = 0
 	visted[sx][sy] = true
@@ -85,6 +85,7 @@ func bfs() int {
 	for q.size() > 0 {
 		// キューの先頭を取り出す
 		p := q.front()
+		// fmt.Println(p)
 		q.pop()
 
 		// 取り出してきた状態がゴールなら探索を終了
@@ -98,7 +99,7 @@ func bfs() int {
 			ny := p.Y + dy[i]
 
 			if 0 <= nx && nx < r && 0 <= ny && ny < c && string(field[nx][ny]) != "#" && !visted[nx][ny] {
-				q.push(P{X: nx, Y: ny})
+				q.push(&P{X: nx, Y: ny})
 				d[nx][ny] = d[p.X][p.Y] + 1
 				visted[nx][ny] = true
 
