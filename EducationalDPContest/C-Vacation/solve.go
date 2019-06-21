@@ -55,7 +55,7 @@ func main() {
 		chmax(&res, dp[n][i])
 	}
 
-	fmt.Println(res)
+	fmt.Println(int(res))
 }
 
 func abs(a int) int {
