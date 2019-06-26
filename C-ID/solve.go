@@ -6,6 +6,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -20,9 +21,18 @@ func nextInt() int {
 }
 
 type PY struct {
-	Id int
-	P  int
-	Y  int
+	Id     int
+	P      int    // 所属している県
+	Y      int    // 誕生都市
+	Rank   int    // 誕生時の順番
+	Serial string // シリアル
+}
+
+func (p *PY) NewSerial() {
+
+	upper := strings.Repeat("0", (6-len(strconv.Itoa(p.P)))) + strconv.Itoa(p.P)
+	lower := strings.Repeat("0", (6-len(strconv.Itoa(p.Rank)))) + strconv.Itoa(p.Rank)
+	p.Serial = upper + lower
 }
 
 type PYS []PY
@@ -59,66 +69,38 @@ func (b ByID) Less(i, j int) bool {
 	return b.PYS[i].Id < b.PYS[j].Id
 }
 
-type Serial struct {
-	Id     int
-	Number int
-}
-
-type Serials []Serial
-
-func (s Serials) Len() int {
-	return len(s)
-}
-
-func (s Serials) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-func (s Serials) Less(i, j int) bool {
-	return s[i].Id < s[j].Id
-}
+var group = make(map[int][]PY)
+var (
+	n int
+	m int
+)
 
 func main() {
 	sc.Split(bufio.ScanWords)
 
-	n := nextInt()
-	m := nextInt()
-
-	slice := make([]PY, m)
+	n, m = nextInt(), nextInt()
 	for i := 0; i < m; i++ {
-		slice[i].Id = i
-		slice[i].P = nextInt()
-		slice[i].Y = nextInt()
+		p, y := nextInt(), nextInt()
+		group[p] = append(group[p], PY{Id: i, P: p, Y: y, Rank: 0, Serial: ""})
 	}
 
-	fmt.Println(n)
+	// fmt.Println(group)
 
-	fmt.Println(slice)
+	ans := make([]PY, 0)
 
-	sort.Sort(ByP{slice})
-	sort.Sort(ByY{slice})
-
-	fmt.Println(slice)
-
-	serials := make([]Serial, m)
-	for i, s := range slice {
-		upper := strconv.Itoa(s.P)
-		for len(upper) == 6 {
-			upper = "0" + upper
+	for _, v := range group {
+		sort.Sort(ByY{v})
+		for i := 0; i < len(v); i++ {
+			v[i].Rank = i + 1
+			v[i].NewSerial()
+			ans = append(ans, v[i])
 		}
-
-		lower := strconv.Itoa(s.Y)
-		for len(lower) == 6 {
-			lower = "0" + 
-		}
-
-		serials[i].Id = s.Id
-		serials[i].Number, _ = strconv.Atoi(upper + lower)
-
 	}
 
-	// sort.Sort(serials)
-	for _, s := range serials {
-		fmt.Println(s.Number)
+	// fmt.Println(group)
+
+	sort.Sort(ByID{ans})
+	for _, a := range ans {
+		fmt.Println(a.Serial)
 	}
 }
