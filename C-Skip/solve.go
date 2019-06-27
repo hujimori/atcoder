@@ -33,22 +33,13 @@ func main() {
 		x[i] = nextInt()
 	}
 	sort.Ints(x)
-	fmt.Println(x)
-	// min := 1000000000000
+
 	n := make([]int, N+1)
-	for i := 0; i < N+1; i++ {
-		n[i] = abs(x[i+1] - x[i])
+	n[0] = 0
+	for i := 1; i < N+1; i++ {
+		n[i] = gcd(n[i-1], abs(x[i]-x[i-1]))
 	}
-
-	res := make([]int, len(n))
-	res[0] = n[1]
-	for i := 1; i < len(n)-1; i++ {
-		gcd(n[i])
-
-	}
-
-	fmt.Println(n)
-
+	fmt.Println(n[N])
 }
 
 func gcd(a, b int) int {
