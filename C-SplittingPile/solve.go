@@ -27,25 +27,31 @@ func main() {
 		a[i] = nextInt()
 	}
 
-	if n =
+	// if n == 2 {
+	// 	fmt.Println(abs(a[0] - a[1]))
+	// 	return
+	// }
 
-
-	left := make([]int, n)
+	left := make([]int, n+1)
 	left[0] = 0
-	for i := 0; i < n-1; i++ {
+	for i := 0; i < n; i++ {
 		left[i+1] = a[i] + left[i]
 	}
+	right := make([]int, n+1)
+	right[0] = 0
+	for i := 0; i < n; i++ {
+		right[i+1] = a[n-1-i] + right[i]
+	}
 
-	fmt.Println(left)
 	min := math.Inf(1)
 
-	for i := 1; i < n-1; i++ {
+	for i := 1; i < n; i++ {
 		x := left[i]
-		y := left[n-1] - left[i+1]
-		fmt.Printf("x=%d, y=%d\n", x, y)
+		y := right[n-i]
 
 		rec := float64(abs(x - y))
 		if min > rec {
+
 			min = rec
 		}
 	}
