@@ -33,7 +33,35 @@ func main() {
 		a[i] = nextInt()
 	}
 	sum = make([]int, N+1)
-	solve()
+	// solve()
+	solve2()
+}
+
+func solve2() {
+	res := N + 1
+	s := 0
+	t := 0
+	sum := 0
+
+	for {
+		for t < N && sum < S {
+			sum += a[t]
+			t++
+		}
+		if sum < S {
+			break
+		}
+
+		res = min(res, t-s)
+		sum -= a[s]
+		s++
+	}
+
+	if res > N {
+		res = 0
+	}
+
+	println(res)
 }
 
 func solve() {
