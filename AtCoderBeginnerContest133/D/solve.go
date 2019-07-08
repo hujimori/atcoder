@@ -26,19 +26,25 @@ func nextLine() string {
 func main() {
 	sc.Split(bufio.ScanWords)
 	n := nextInt()
-	a := make([]int, n+1)
+	a := make([]int, n)
+	s := 0
 	for i := 0; i < n; i++ {
 		a[i] = nextInt()
+		s += a[i]
 	}
 
-	m := make([]int, n+1)
-	m[0] = 0
-	// m[1] = 2 * a[0]
+	x := make([]int, n)
+	for i := 1; i < n; i += 2 {
+		s -= 2 * a[i]
+	}
+	x[0] = s
 
-	for i := 1; i < n+1; i++ {
-		m[i] = 2*a[i-1] - m[i-1]
+	for i := 0; i < n-1; i++ {
+		x[i+1] = 2*a[i] - x[i]
 	}
 
-	fmt.Println(m)
+	for _, v := range x {
+		fmt.Printf("%d ", v)
+	}
 
 }
