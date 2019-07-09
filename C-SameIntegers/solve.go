@@ -28,22 +28,16 @@ func main() {
 	}
 
 	sort.Ints(slice)
-	first := slice[0]
-	second := slice[1]
-	third := slice[2]
+	a, b, c := slice[0], slice[1], slice[2]
 
-	// var count int
-	// min := 100
-	for i := second; i <= third; i++ {
-		fmt.Printf("i = %d\n", i)
-		count := third - i
-		fmt.Println(count)
+	cnt := 0
 
-		if tmp := (third - (count+first); tmp%2 == 0 {
-			count = count + tmp/2
-			break
-		}
-
+	if (c-b)%2 == 0 && (c-a)%2 == 0 {
+		cnt += (c-b)/2 + (c-a)/2
+	} else if ((c-b)%2 == 0 && (c-a)%2 == 1) || ((c-b)%2 == 1 && (c-a)%2 == 0) {
+		cnt += (c-b)/2 + (c-a)/2 + 2
+	} else {
+		cnt += (c-b)/2 + (c-a)/2 + 1
 	}
-
+	fmt.Println(cnt)
 }
