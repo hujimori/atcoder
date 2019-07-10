@@ -26,7 +26,6 @@ func main() {
 		t[i] = nextInt()
 	}
 
-	// sum := make([]int, N+1)
 	ans := 0
 
 	for i := 0; i < N-1; i++ {
