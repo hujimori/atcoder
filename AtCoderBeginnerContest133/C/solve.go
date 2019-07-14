@@ -28,21 +28,22 @@ func main() {
 
 	L, R := nextInt(), nextInt()
 
-	// if R < 2019 {
-	// 	fmt.Println(L * R)
-	// }
-
-	l := L % 2019
-	r := R % 2019
-
-	ans := 0
-	if l < r {
-		ans = (l % 2019) * ((l + 1) % 2019)
-	} else {
-		ans = (R % 2019) * ((R + 1) % 2019)
+	if R-L > 2019 {
+		fmt.Println(0)
+		return
 	}
 
-	fmt.Println(ans)
+	min := 100000000
+
+	for i := L; i <= R-1; i++ {
+		for j := L + 1; j <= R; j++ {
+			if min > i*j%2019 {
+				min = i * j % 2019
+			}
+		}
+	}
+
+	fmt.Println(min)
 }
 
 func gcd(a, b int) int {
