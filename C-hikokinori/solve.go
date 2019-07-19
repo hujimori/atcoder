@@ -38,32 +38,22 @@ func main() {
 	sum := 0
 	av := 0
 	bv := 0
-	for ans = 0; ; ans++ {
-
-		if av == len(a) || bv == len(b) {
+	for {
+		av = binarysearch.LowerBound(a, sum)
+		if av < len(a) {
+			sum = a[av] + x
+		} else {
 			break
 		}
 
-		bv = binarysearch.LowerBound(b, sum+x)
+		bv = binarysearch.LowerBound(b, sum)
 		if bv < len(b) {
-			sum += x
-			sum += abs(b[bv] - sum)
+			sum = b[bv] + y
+			ans++
+		} else {
+			break
 		}
-
-		av = binarysearch.LowerBound(a, sum+y)
-		if av < len(a) {
-			sum += y
-			sum += abs(a[av] - sum)
-		}
-
 	}
 
 	fmt.Println(ans)
-}
-
-func abs(a int) int {
-	if a < 0 {
-		return -1 * a
-	}
-	return a
 }
