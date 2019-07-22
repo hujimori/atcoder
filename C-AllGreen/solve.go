@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 )
@@ -35,28 +36,47 @@ func main() {
 		c[i] = nextInt()
 	}
 
- for {
+	res := 100000100000
+	for bit := 0; bit < (1 << uint(d)); bit++ {
+		sum := 0
+		num := 0
 
-	for i := 0; i < d; i++{
-	
-		for j := 0; j < p[i]; j++ {
-			sum += j * c[i]
+		// p[i]をすべて解いた時の得点
+		for i := 0; i < d; i++ {
+			if bit&(1<<uint(i)) == 1<<uint(i) {
+				sum += c[i] + p[i]*100*(int(i)+1)
+				num += p[i]
+			}
+			// fmt.Println(res)
+
 		}
 
+		if sum >= g {
+			res = min(res, num)
+		} else {
+			for i := d - 1; i >= 0; i-- {
+				if bit&(1<<uint(i)) == 1<<uint(i) {
+					continue
+				}
+				for j := 0; j < p[i]; j++ {
+					if sum >= g {
+						break
+					}
+					sum += 100 * (int(i) + 1)
+					num++
+				}
+			}
+			res = min(res, num)
+		}
 
 	}
+
+	fmt.Println(res)
 }
-	
 
-}
-
-func dfs(, score, count int) (int, int) {
-
-	if i == d {
-		return 0, score
+func min(a, b int) int {
+	if a < b {
+		return a
 	}
-
-
-	dfs(i+1, score+)
-
+	return b
 }
