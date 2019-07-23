@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -34,24 +35,8 @@ func (abs ABS) Swap(i, j int) {
 }
 
 func (abs ABS) Less(i, j int) bool {
-	return abs[i].B-abs[i].A < abs[j].B-abs[j].A
+	return abs[i].B < abs[j].B
 }
-
-// type ByA struct {
-// 	ABS
-// }
-
-// func (b ByA) Less(i, j int) bool {
-// 	return b.ABS[i].A < b.ABS[j].A
-// }
-
-// type ByB struct {
-// 	ABS
-// }
-
-// func (b ByB) Less(i, j int) bool {
-// 	return b.ABS[i].B < b.ABS[j].B
-// }
 
 func main() {
 	sc.Split(bufio.ScanWords)
@@ -61,26 +46,18 @@ func main() {
 	for i := 0; i < m; i++ {
 		slice[i] = AB{A: nextInt(), B: nextInt()}
 	}
+	n++
 
-	// sort.Sort(ByA{slice})
-	// // sort.Sort(ByB{slice})
-	// fmt.Println(bridge)
+	sort.Sort(ABS(slice))
 
-	// sort.Sort(ABS(slice))
-
-	// startA := slice[0].A
-	// startB := slice[0].B
-
-	// 切り落とす橋の本数
-	cutBridge := 1
-
-	for i := 0; i < m-1; i++ {
-		if slice[i].A <= slice[i+1].B && slice[i].B >= slice[i+1].A {
-			continue
-		} else {
-			cutBridge++
+	res := 0
+	end := 0 // 最後に選んだ島の位置
+	for i := 0; i < m; i++ {
+		if slice[i].A >= end {
+			end = slice[i].B
+			res++
 		}
 	}
 
-	fmt.Println(cutBridge)
+	fmt.Println(res)
 }
