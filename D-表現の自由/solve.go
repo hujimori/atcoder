@@ -121,10 +121,9 @@ func main() {
 	N, M := int64(nextInt()), int64(nextInt())
 
 	COMinit()
-	var NN int64
 	if N < 0 {
-		NN 
-	} 
+		N = N * -1
+	}
 	vec := primeFactorize(N)
 	res := int64(1)
 	for !vec.IsEmpty() {
@@ -134,13 +133,11 @@ func main() {
 		res = (res * tmp) % MOD
 	}
 
-	if N > 1 {
-		res = res * COM(M, 1) % MOD
-	} else {
-	// 	for i := int64(0); i < M-1; i++ {
-	// 		res = res * 2 % MOD
-	// 	}
-	// }
+	ans := int64(0)
+	for i := M % 2; i <= M; i += 2 {
+		ans += res * COM(M, i)
+		ans %= MOD
+	}
 
-	fmt.Println(res)
+	fmt.Println(ans)
 }
