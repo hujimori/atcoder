@@ -18,6 +18,7 @@ func nextInt() int {
 	return i
 }
 
+// v現在いる頂点、pはvの親
 func dfs(v, p, c int) {
 	colors[v] = c
 	for _, nextv := range G[v] {
