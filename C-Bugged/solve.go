@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -28,6 +29,23 @@ func main() {
 		s[i] = nextInt()
 		ans += s[i]
 	}
+
+	sort.Ints(s)
+
+	if ans%10 == 0 {
+		for i := 0; i < n; i++ {
+			if s[i]%10 != 0 {
+				ans -= s[i]
+				break
+			}
+		}
+	}
+
+	if ans%10 == 0 {
+		ans = 0
+	}
+
+	fmt.Println(ans)
 
 	// dp := make([]int, n+10)
 	// for i := 0; i < n+10; i++ {
@@ -68,7 +86,7 @@ func main() {
 	// 	}
 	// }
 
-	fmt.Println(ans)
+	// fmt.Println(ans)
 
 }
 
