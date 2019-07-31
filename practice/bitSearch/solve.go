@@ -4,10 +4,10 @@ import "fmt"
 
 func main() {
 
-	// bitSearch()
+	bitSearch()
 	// solve()
 	// solve2()
-	solve3()
+	// solve3()
 }
 
 func bitSearch() {
