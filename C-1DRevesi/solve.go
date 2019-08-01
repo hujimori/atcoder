@@ -20,21 +20,20 @@ func nextInt() int {
 }
 
 func main() {
-	sc.Split(bufio.ScanWords)
 
 	var s string
 	fmt.Scan(&s)
 
 	slice := strings.Split(s, "")
 
-	sum := len(s)
-	bCnt := 0
-	for i := 0; i < len(s); i++ {
-		if slice[i] == "B" {
-			continue
+	cnt := 0
+
+	for i := 0; i < len(s)-1; i++ {
+		if slice[i] != slice[i+1] {
+			cnt++
 		}
-		if slice[i] 
-		
 
 	}
+
+	fmt.Println(cnt)
 }
