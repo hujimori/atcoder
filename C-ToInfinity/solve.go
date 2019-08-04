@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -20,20 +19,24 @@ func nextInt() int {
 }
 
 func main() {
-
 	var s string
+	var k int
 	fmt.Scan(&s)
+	fmt.Scan(&k)
 
-	slice := strings.Split(s, "")
-
-	cnt := 0
-
-	for i := 0; i < len(s)-1; i++ {
-		if slice[i] != slice[i+1] {
-			cnt++
+	sum := 0
+	for _, ss := range s {
+		if string(ss) == "1" {
+			sum++
+		} else {
+			break
 		}
-
 	}
 
-	fmt.Println(cnt)
+	if sum >= k {
+		fmt.Println(1)
+	} else {
+		fmt.Println(string(s[sum]))
+	}
+
 }

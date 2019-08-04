@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -20,20 +19,16 @@ func nextInt() int {
 }
 
 func main() {
+	sc.Split(bufio.ScanWords)
 
-	var s string
-	fmt.Scan(&s)
+	n, k := nextInt(), nextInt()
 
-	slice := strings.Split(s, "")
-
-	cnt := 0
-
-	for i := 0; i < len(s)-1; i++ {
-		if slice[i] != slice[i+1] {
-			cnt++
-		}
-
+	if k%2 == 0 {
+		a := n / k
+		b := (n + (k / 2)) / k
+		fmt.Println(a*a*a + b*b*b)
+	} else {
+		a := n / k
+		fmt.Println(a * a * a)
 	}
-
-	fmt.Println(cnt)
 }
