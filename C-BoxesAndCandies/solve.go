@@ -26,52 +26,29 @@ func main() {
 	for i := 0; i < n; i++ {
 		a[i] = nextInt()
 	}
-	sum := make([]int, n)
+
+	ans := 0
 	for i := 0; i < n-1; i++ {
-		sum[i] = a[i] + a[i+1]
-	}
 
-	// cost := 0
-	// for i := 0; i < len(sum); i++ {
-	// 	if sum[i] > x {
-	// 		c := sum[i] - x
-	// 		sum[i] -= c
-	// 		sum[i+1] -= c
-	// 		cost += c
-	// 	}
-	// 	// fmt.Println(sum)
-	// }
+		delta := max(0, a[i]+a[i+1]-x)
+		a[i+1] -= delta
 
-	// fmt.Println(cost)
-
-	count := 0
-	for i := 0; i < n-1; i++ {
-		if a[i]+a[i+1] > x {
-			c := a[i] + a[i+1] - x
-			count += c
-			if a[i+1] > c {
-				a[i+1] -= c
-			} else {
-				c -= a[i+1]
-				a[i+1] = 0
-				a[i] -= c
-			}
-
-			// if a[i] > a[i+1] {
-			// 	a[i] -= c
-			// 	count += c
-			// } else if a[i] < a[i+1] {
-			// 	a[i+1] -= c
-			// 	count += c
-			// } else {
-			// 	a[i+1] -= c
-			// 	count += c
-			// }
-
+		if a[i+1] < 0 {
+			a[i] += a[i+1]
+			a[i+1] = 0
 		}
+
+		ans += delta
+
 	}
 
-	// fmt.Println(a)
+	fmt.Println(ans)
+}
 
-	fmt.Println(count)
+func max(a, b int) int {
+	if a < b {
+		return b
+	}
+
+	return a
 }
