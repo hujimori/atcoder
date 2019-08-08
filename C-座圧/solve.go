@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"sort"
 	"strconv"
@@ -40,7 +41,7 @@ func main() {
 		m[u[i]] = i
 	}
 	for _, x := range a {
-		println(m[x])
+		fmt.Println(m[x])
 	}
 
 	// aa := make([]int, N)
