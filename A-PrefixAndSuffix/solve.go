@@ -27,8 +27,6 @@ func main() {
 	fmt.Scan(&s)
 	fmt.Scan(&t)
 
-	// ss := strings.Split(s, "")
-	// tt := strings.Split(t, "")
 
 	for l := 0; l < N; l++ {
 		if s[l:N] == t[0:N-l] {
